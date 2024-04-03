@@ -3,7 +3,7 @@ import calculator from '../../assets/calculator-solid.svg'
 import { useContext} from 'react'
 import Graphic from '../../components/Graphic/Graphic'
 import ExpressionContext from '../../context/ExpressionContext'
-import { derivative } from 'mathjs'
+import { compile, derivative } from 'mathjs'
 
 
 export default function Home () {
@@ -18,10 +18,22 @@ export default function Home () {
         }
     }
 
+    const evaluateFunction = (fn:string) => {
+        let auxfn
+        try{
+            compile(fn)
+            auxfn = fn
+        } catch (e:any){
+            auxfn = ''
+        } finally {
+            return auxfn
+        }
+    }
+
     const setFunction = (e:any) => {
         const string = e.target.value
         const newFn = {
-            fn: string,
+            fn: evaluateFunction(string),
             derivative: derivate(string),
         }
         setExpression(newFn)
@@ -34,7 +46,7 @@ export default function Home () {
 
                 {/* <Expressions expression={expression} SetExpression={SetExpression}/> */}
                 <input type="text" id='funcion' onInput={setFunction} placeholder='ingrese la funcion' required/>
-                <Graphic expression={expression} />
+                <Graphic expression={expression}/>
                 <input id='biseccion' type="radio" name='metodo' value="biseccion" />
                 <label htmlFor='biseccion'>
                     Biseccion
