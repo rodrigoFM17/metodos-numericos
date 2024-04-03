@@ -1,12 +1,15 @@
+import { Route } from 'wouter'
 import './App.css'
 import Home from './pages/Home/Home'
+import { useState } from 'react'
+import {ExpressionContextProvider} from './context/ExpressionContext'
 
 function App() {
 
   return (
-    <>
-      <Home/>
-    </>
+    <ExpressionContextProvider>
+      <Route component={Home} path='/' />
+    </ExpressionContextProvider>
   )
 }
 

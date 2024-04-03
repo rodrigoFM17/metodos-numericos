@@ -1,43 +1,40 @@
 import './Home.css'
 import calculator from '../../assets/calculator-solid.svg'
-import Expressions from '../../components/Expression/Expression'
-import { useState } from 'react'
-import {ITerm} from '../../models/Term'
+import { useContext} from 'react'
+import Graphic from '../../components/Graphic/Graphic'
+import ExpressionContext from '../../context/ExpressionContext'
+import { derivative } from 'mathjs'
 
-const createFunctions = (expression: ITerm[]) => {
-
-    expression.forEach(expression => {
-        if(expression.type === 'algebraic' && !expression.function){
-            expression.function = (argument: number) => {
-                return (expression.coefficient * argument) ^ expression.coefficient 
-            }
-        }
-        
-    })
-}
 
 export default function Home () {
 
-    const [expression, SetExpression] = useState<ITerm[]>([])
+    const {expression, setExpression} = useContext(ExpressionContext)
 
-    const getData = (e:any) => {
-        e.preventDefault()
-        const method = document.querySelector("input[name='metodo']:checked") as HTMLInputElement
-        console.log(method.value)
-        if (!expression.length) {
-            alert('no ha ingresado la funcion')
-        } else {
-            createFunctions(expression)
+    const derivate = (fn:string) => {
+        try{
+            return derivative(fn, "x").toString()
+        } catch(e: any){
+            return ""
         }
+    }
 
+    const setFunction = (e:any) => {
+        const string = e.target.value
+        const newFn = {
+            fn: string,
+            derivative: derivate(string),
+        }
+        setExpression(newFn)
     }
 
     return (<section className='home' >
             
             <h2>Metodos Numericos</h2>
-            <form className='selection-method' aria-required onSubmit={getData}>
+            <form className='selection-method' aria-required onSubmit={() => {}}>
 
-                <Expressions expression={expression} SetExpression={SetExpression}/>
+                {/* <Expressions expression={expression} SetExpression={SetExpression}/> */}
+                <input type="text" id='funcion' onInput={setFunction} placeholder='ingrese la funcion' required/>
+                <Graphic expression={expression} />
                 <input id='biseccion' type="radio" name='metodo' value="biseccion" />
                 <label htmlFor='biseccion'>
                     Biseccion
@@ -60,12 +57,6 @@ export default function Home () {
                 </button>
 
             </form>
-
-            <figure>
-                
-                <iframe src="https://www.geogebra.org/calculator" >
-
-                </iframe>
-            </figure>        
+     
     </section>)
 }
