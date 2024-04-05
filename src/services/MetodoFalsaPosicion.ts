@@ -1,4 +1,4 @@
-interface IterationsData {
+export interface IterationsData {
     a: number;
     b: number;
     fa: number;
@@ -7,7 +7,7 @@ interface IterationsData {
     fxi: number;
     e: number;
 }
-function falsePositionMethod(
+export function falsePositionMethod(
     func: (x:number) => number,
     a: number,
     b: number,
@@ -57,7 +57,7 @@ function fx(x: number): number {
     return x ** 3 - 2 * x - 5;
 }
 
-const { root, iteractions } = falsePositionMethod(fx, 2, 3);
+const { root, iterations } = falsePositionMethod(fx, 2, 3);
 
 if (root !== null) {
     console.log(`La raíz aproximada es: ${root.toFixed(6)}`);

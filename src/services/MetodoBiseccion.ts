@@ -6,7 +6,7 @@ interface IterationData {
     e: number;
 }
 
-function bisectionMethod(
+export function bisectionMethod(
     func:(x: number) => number,
     x1: number,
     x2: number,
