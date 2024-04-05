@@ -43,7 +43,6 @@ export default function Home () {
 
     const calculate = () => {
         const func = expression;
-        const {root, functions} = bisectionMethod(func, 2, 3);
         //const {root, functions} = falsePositionMethod(func, 2, 3);
     }
 
@@ -72,7 +71,7 @@ export default function Home () {
                     Newton Raphson
                 </label>
 
-                <button onClick={}>
+                <button>
                     <img src={calculator} alt="" />
                 </button>
 

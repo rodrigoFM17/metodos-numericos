@@ -3,7 +3,9 @@ import { createContext, useState } from "react";
 type fn = {
     expression: {
         fn: string,
-        derivative: string
+        derivative: string,
+        compiledFn?: () => number,
+        interval?: number[]
     },
     setExpression: any,
 }
