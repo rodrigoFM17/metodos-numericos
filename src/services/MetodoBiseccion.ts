@@ -24,13 +24,6 @@ function bisectionMethod(
 
         if (Math.abs(fxp)<tolerance) {
             root = xp;
-            break;
-        }
-
-        if(func(x1) * fxp < 0){
-            x2 = xp;
-        }else{
-            x1 = xp;
         }
 
         if(iteration > 0){
@@ -39,6 +32,16 @@ function bisectionMethod(
         }
 
         iterations.push({ x1, x2, xp, fxp, e });
+
+        if (root != null) {
+            break;
+        }
+        
+        if(func(x1) * fxp < 0){
+            x2 = xp;
+        }else{
+            x1 = xp;
+        }
 
         iteration++;
     }
