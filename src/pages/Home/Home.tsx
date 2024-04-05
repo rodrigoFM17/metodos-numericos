@@ -4,6 +4,8 @@ import { useContext} from 'react'
 import Graphic from '../../components/Graphic/Graphic'
 import ExpressionContext from '../../context/ExpressionContext'
 import { compile, derivative } from 'mathjs'
+import bisectionMethod from '../../services/MetodoBiseccion'
+import falsePositionMethod from '../../services/MetodoFalsaPosicion'
 
 
 export default function Home () {
@@ -39,6 +41,12 @@ export default function Home () {
         setExpression(newFn)
     }
 
+    const calculate = () => {
+        const func = expression;
+        const {root, functions} = bisectionMethod(func, 2, 3);
+        //const {root, functions} = falsePositionMethod(func, 2, 3);
+    }
+
     return (<section className='home' >
             
             <h2>Metodos Numericos</h2>
@@ -64,7 +72,7 @@ export default function Home () {
                     Newton Raphson
                 </label>
 
-                <button>
+                <button onClick={}>
                     <img src={calculator} alt="" />
                 </button>
 

@@ -53,19 +53,20 @@ function falsePositionMethod(
     return { root, iterations };
 }
 
-function fx(x: number): number {
-    return x ** 3 - 2 * x - 5;
-}
+export default falsePositionMethod;
+// function fx(x: number): number {
+//     return x ** 3 - 2 * x - 5;
+// }
 
-const { root, iteractions } = falsePositionMethod(fx, 2, 3);
+// const { root, iteractions } = falsePositionMethod(fx, 2, 3);
 
-if (root !== null) {
-    console.log(`La raíz aproximada es: ${root.toFixed(6)}`);
-} else {
-    console.log("No se pudo encontrar la raíz dentro de la tolerancia especificada.");
-}
+// if (root !== null) {
+//     console.log(`La raíz aproximada es: ${root.toFixed(6)}`);
+// } else {
+//     console.log("No se pudo encontrar la raíz dentro de la tolerancia especificada.");
+// }
 
-console.log("Datos de cada iteración:");
-iterations.forEach((data, index) => {
-    console.log(`Iteración ${index + 1}: a = ${data.a.toFixed(6)}, b = ${data.b.toFixed(6)}, f(a) = ${data.fa.toFixed(6)}, f(b) = ${data.fb.toFixed(6)}, xi = ${data.xi.toFixed(6)}, f(xi) = ${data.fxi.toFixed(6)}, error = ${data.e.toFixed(6)}`);
-});
+// console.log("Datos de cada iteración:");
+// iterations.forEach((data, index) => {
+//     console.log(`Iteración ${index + 1}: a = ${data.a.toFixed(6)}, b = ${data.b.toFixed(6)}, f(a) = ${data.fa.toFixed(6)}, f(b) = ${data.fb.toFixed(6)}, xi = ${data.xi.toFixed(6)}, f(xi) = ${data.fxi.toFixed(6)}, error = ${data.e.toFixed(6)}`);
+// });
