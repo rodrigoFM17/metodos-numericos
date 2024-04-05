@@ -48,19 +48,20 @@ export function bisectionMethod(
     return {root, iterations};
 }
 
-function f(x: number): number {
-    return x ** 3 - 2 * x - 5;
-}
+export default bisectionMethod;
+// function f(x: number): number {
+//     return x ** 3 - 2 * x - 5;
+// }
 
-const {root, iterations} = bisectionMethod(f, 2, 3);
+// const {root, iterations} = bisectionMethod(f, 2, 3);
 
-if (root !== null) {
-    console.log(`La raíz aproximada es: ${root.toFixed(6)}`);
-} else {
-    console.log("No se pudo encontrar la raíz dentro de la tolerancia especificada.");
-}
+// if (root !== null) {
+//     console.log(`La raíz aproximada es: ${root.toFixed(6)}`);
+// } else {
+//     console.log("No se pudo encontrar la raíz dentro de la tolerancia especificada.");
+// }
 
-console.log("Datos de cada iteración:");
-iterations.forEach((data, index) => {
-    console.log(`Iteración ${index + 1}: x1 = ${data.x1.toFixed(6)}, x2 = ${data.x2.toFixed(6)}, xp = ${data.xp.toFixed(6)}, fxp = ${data.fxp.toFixed(6)}, error = ${data.e.toFixed(6)}`);
-});
+// console.log("Datos de cada iteración:");
+// iterations.forEach((data, index) => {
+//     console.log(`Iteración ${index + 1}: x1 = ${data.x1.toFixed(6)}, x2 = ${data.x2.toFixed(6)}, xp = ${data.xp.toFixed(6)}, fxp = ${data.fxp.toFixed(6)}, error = ${data.e.toFixed(6)}`);
+// });
