@@ -1,43 +1,36 @@
 import { useContext, useEffect, useState } from 'react'
 import MethodTable from '../../components/MethodTable/MethodTable'
-import { FalsaIterationsData, falsePositionMethod } from '../../services/MetodoFalsaPosicion'
-import './FalsaPosicion.css'
+import '../FalsaPosicion/FalsaPosicion.css'
 import ExpressionContext from '../../context/ExpressionContext'
-
+import bisectionMethod, { BiseccionIterationData } from '../../services/MetodoBiseccion'
 type methodData = {
     root: number | null,
-    iterations: FalsaIterationsData[]
+    iterations: BiseccionIterationData[]
 }
 
-export default function FalsaPosicion() {
-
-    const headers = ["a", "b","fa", "fb", "xi","fxi", "f(a)*f(xr)", "e"]
+export default function Biseccion () {
+    const headers = ["x1", "x2", "xp", "fxp", "e"]
     const {expression} = useContext(ExpressionContext)
     const [methodData, setMethodData] = useState<methodData>({
         root: 0,
         iterations: []
     })
-    
-    function fx(x: number): number {
-        return x ** 3 - 2 * x - 5;
-    }
 
-    useEffect(()=> {
+    useEffect (() => {
         if (expression.compiledFn && expression.interval)
-        setMethodData(falsePositionMethod(expression.compiledFn,expression.interval[0],expression.interval[1]))
-        
+        setMethodData(bisectionMethod(expression.compiledFn,expression.interval[0],expression.interval[1]))
     },[])
 
     useEffect(()=> {
         console.log(methodData)
     },[methodData])
-
-    return(
+    return (
         <section className='falsa-posicion'>
-
-            <h1>Falsa Posicion</h1>
+            <h1>Biseccion</h1>
 
             <MethodTable headers={headers} methodData={methodData.iterations}/>
+
+            <h3>La raiz es: <span id='raiz'>{methodData.root}</span></h3>
         </section>
     )
 }

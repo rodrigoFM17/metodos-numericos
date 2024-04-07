@@ -1,10 +1,12 @@
+import { EvalFunction } from "mathjs";
 import { createContext, useState } from "react";
 
 type fn = {
     expression: {
         fn: string,
         derivative: string,
-        compiledFn?: () => number,
+        compiledFn?: EvalFunction,
+        compiledDerivative?: EvalFunction
         interval?: number[]
     },
     setExpression: any,

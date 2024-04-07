@@ -1,4 +1,6 @@
-export interface IterationsData {
+import { EvalFunction } from "mathjs";
+
+export interface FalsaIterationsData {
     a: number;
     b: number;
     fa: number;
@@ -8,21 +10,21 @@ export interface IterationsData {
     e: number;
 }
 export function falsePositionMethod(
-    func: (x:number) => number,
+    func: EvalFunction,
     a: number,
     b: number,
     tolerance: number = 0.0001,
     maxIterations: number = 100
-):{root: number | null , iterations: IterationsData[] } {
-    const iterations: IterationsData[] = [];
+):{root: number | null , iterations: FalsaIterationsData[] } {
+    const iterations: FalsaIterationsData[] = [];
     let iteration = 0;
     let root: number | null = null;
 
     while (iteration < maxIterations) {
-        let fa = func(a);
-        let fb = func(b);
+        let fa = func.evaluate({x:a});
+        let fb = func.evaluate({x:b});
         const xi = ((a*fb) - (b*fa))/(fb-fa);
-        const fxi = func(xi);
+        const fxi = func.evaluate({x:xi});
         let e = 0;
 
         if(Math.abs(fxi) < tolerance){
@@ -40,7 +42,7 @@ export function falsePositionMethod(
             break;
         }
 
-        if(func(a) * fxi < 0){
+        if(func.evaluate({x:a}) * fxi < 0){
             b = xi;
             fb = fxi;
         }else{

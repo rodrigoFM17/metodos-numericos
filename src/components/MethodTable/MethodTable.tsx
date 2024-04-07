@@ -9,10 +9,12 @@ export default function MethodTable({headers, methodData}: props) {
 
     return <table className="method-table">
         <thead>
-            <th>i</th>
-                {
-                    headers.map((header, index) => <th key={`tableHeader${index}`}>{header}</th>)
-                }
+            <tr>
+                <td>i</td>
+                    {
+                        headers.map((header, index) => <td key={`tableHeader${index}`}>{header}</td>)
+                    }
+            </tr>
         </thead>
         <tbody>
             {

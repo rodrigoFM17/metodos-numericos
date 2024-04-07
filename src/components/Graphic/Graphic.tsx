@@ -8,8 +8,6 @@ type Props = {
 
 export default function Graphic ({expression}: Props){
 
-    
-
     const evaluateFunction = (argument: number) => {
         try{
             const compiled = compile(expression.fn)

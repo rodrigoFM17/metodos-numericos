@@ -1,4 +1,6 @@
-interface IterationData {
+import { EvalFunction } from "mathjs";
+
+export interface BiseccionIterationData {
     x1: number;
     x2: number;
     xp: number;
@@ -7,19 +9,19 @@ interface IterationData {
 }
 
 export function bisectionMethod(
-    func:(x: number) => number,
+    func:EvalFunction,
     x1: number,
     x2: number,
     tolerance: number = 0.0001,
     maxIterations: number = 100
-): { root: number | null; iterations: IterationData[] } {
-    const iterations: IterationData[] = [];
+): { root: number | null; iterations: BiseccionIterationData[] } {
+    const iterations: BiseccionIterationData[] = [];
     let iteration = 0;
     let root: number | null = null;
 
     while(iteration < maxIterations){
         const xp = (x1+x2)/2;
-        const fxp = func(xp);
+        const fxp = func.evaluate({x: xp});
         let e = 0;
 
         if (Math.abs(fxp)<tolerance) {
@@ -37,7 +39,7 @@ export function bisectionMethod(
             break;
         }
         
-        if(func(x1) * fxp < 0){
+        if(func.evaluate({x:x1}) * fxp < 0){
             x2 = xp;
         }else{
             x1 = xp;

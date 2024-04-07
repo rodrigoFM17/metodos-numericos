@@ -12,4 +12,11 @@
         color: var(--main);
         font-size: 3em;
     }
+    #raiz{
+        color: var(--main);
+        font-weight: bolder;
+    }
+    & h3, h3 + span {
+        font-size: 2em;
+    }
 }

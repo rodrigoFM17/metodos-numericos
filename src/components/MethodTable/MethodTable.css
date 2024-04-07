@@ -6,7 +6,7 @@
         height: 2em;
     }
 
-    & thead {
+    & thead > tr > td {
         background-color: black;
     }
 

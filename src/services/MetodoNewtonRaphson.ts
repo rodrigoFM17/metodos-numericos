@@ -1,29 +1,32 @@
-interface IterationsData {
+import { EvalFunction } from "mathjs";
+
+export interface NewtonIterationsData {
     i: number;
     xn: number;
+    fxn:number;
 }
 
 function newtonRaphson(
-    func: (x: number) => number,
-    funcDer: (x: number) => number,
+    func: EvalFunction,
+    funcDer: EvalFunction,
     xi: number,
     tolerance: number = 0.0001,
     maxIterations: number = 100
-): { root: number | null, iterations: IterationsData[] }{
-    const iterations: IterationsData[] = [];
+): { root: number | null, iterations: NewtonIterationsData[] }{
+    const iterations: NewtonIterationsData[] = [];
     let i = 1;
     let root: number | null = null;
 
     while (i < maxIterations) {
-        const fxn = func(xi);
-        const fxnDeri = func(xi);
+        const fxn = func.evaluate({x:xi});
+        const fxnDeri = funcDer.evaluate({x:xi});
         const xn = xi - (fxn/fxnDeri);
 
-        if(Math.abs(xn) < tolerance){
+        if(Math.abs(fxn) < tolerance){
             root = xn;
         }
 
-        iterations.push({i, xn});
+        iterations.push({i, xn, fxn});
 
         if(root != null){
             break;

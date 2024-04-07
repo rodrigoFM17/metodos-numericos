@@ -87,3 +87,24 @@
         transition: 300ms linear;
     }     
 }
+
+.interval-input {
+
+    & h3 {
+        margin-bottom: 10px;
+    }
+
+    border: none;
+    & label {
+        background: none;
+    }
+
+    & input {
+        margin-left: 10px;
+        width: 5em;
+    }
+
+    & legend {
+        text-align: center;
+    }
+}
